@@ -1,2 +1,2 @@
-- name: Setup TFLint
-  uses: terraform-linters/setup-tflint@v3.0.0
+name: Setup TFLint
+uses: terraform-linters/setup-tflint@v3.0.0
