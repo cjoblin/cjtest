@@ -26,5 +26,5 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
 }
 
-invalid{
-}
+#invalid{
+#}
