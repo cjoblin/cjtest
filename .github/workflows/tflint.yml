@@ -1,8 +1,5 @@
 name: Lint
-on:
-  push:
-    branches: [ dev ]
-  pull_request:
+on: [push]
 
 jobs:
   tflint:
