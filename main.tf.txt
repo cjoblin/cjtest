@@ -6,3 +6,6 @@ provider "azurerm" {
 resource "blah" {
   ""
 }
+
+invalid{
+}
