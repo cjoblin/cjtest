@@ -1,6 +1,9 @@
 name: Lint
-on: [push]
-
+on:   
+  push:
+    branches: [ dev ]
+  pull_request:
+  
 jobs:
   tflint:
     runs-on: ${{ matrix.os }}
