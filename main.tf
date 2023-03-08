@@ -8,6 +8,19 @@ terraform {
   }
 }
 
+variable "targetSubscription"{
+	type = string
+}
+variable "tenantID"{
+	type = string
+}
+variable "deploymentAppID"{
+	type = string
+}
+variable "deploymentSecret"{
+	type = string
+}
+
 # Configure the provider
 provider "azurerm" {
   features {}
