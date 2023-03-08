@@ -55,7 +55,7 @@ resource "azurerm_subnet" "example-snet" {
 
 #create a storage accoutn with public access to test tfsec
 resource "azurerm_storage_account" "example-stor" {
-  name                = "ex-storageaccountname"
+  name                = "exstorageaccount1829"
   resource_group_name = azurerm_resource_group.example-rg.name
 
   location                 = azurerm_resource_group.example-rg.location
