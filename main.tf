@@ -3,13 +3,31 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=4.9.0"
+      version = "=3.46.0"
     }
   }
 }
 
+variable "targetSubscription"{
+	type = string
+}
+variable "tenantID"{
+	type = string
+}
+variable "deploymentAppID"{
+	type = string
+}
+variable "deploymentSecret"{
+	type = string
+}
+
 # Configure the provider
 provider "azurerm" {
+  features {}
+  subscription_id = var.targetSubscription
+  tenant_id       = var.tenantID
+  client_id       = var.deploymentAppID
+  client_secret   = var.deploymentSecret
 }
 
 resource "azurerm_resource_group" "example-rg" {
@@ -28,7 +46,7 @@ resource "azurerm_virtual_network" "example-vnet" {
 
 resource "azurerm_subnet" "example-snet" {
   name                 = "example-subnetname"
-  resource_group_name  = azurerm_resource_group.example-vnet.name
+  resource_group_name  = azurerm_resource_group.example-rg.name
   virtual_network_name = azurerm_virtual_network.example-vnet.name
   address_prefixes     = ["10.0.2.0/24"]
   service_endpoints    = ["Microsoft.Sql", "Microsoft.Storage"]
@@ -37,7 +55,7 @@ resource "azurerm_subnet" "example-snet" {
 
 #create a storage accoutn with public access to test tfsec
 resource "azurerm_storage_account" "example-stor" {
-  name                = "ex-storageaccountname"
+  name                = "exstorageaccount1829"
   resource_group_name = azurerm_resource_group.example-rg.name
 
   location                 = azurerm_resource_group.example-rg.location
@@ -45,7 +63,7 @@ resource "azurerm_storage_account" "example-stor" {
   account_replication_type = "LRS"
 
   network_rules {
-    default_action             = "Allow"
+    default_action             = "Deny"
     ip_rules                   = ["0.0.0.0/0"]
     virtual_network_subnet_ids = [azurerm_subnet.example-snet.id]
   }
