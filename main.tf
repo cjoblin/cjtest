@@ -24,7 +24,7 @@ variable "deploymentSecret"{
 # Configure the provider
 provider "azurerm" {
   features {}
-  subscription_id = "${var.targetSubscription}"
+  subscription_id = "var.targetSubscription"
   tenant_id       = "${var.tenantID}"
   client_id       = "${var.deploymentAppID}"
   client_secret   = "${var.deploymentSecret}"
