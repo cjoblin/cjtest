@@ -63,7 +63,7 @@ resource "azurerm_storage_account" "example-stor" {
   account_replication_type = "LRS"
 
   network_rules {
-    default_action             = "Allow"
+    default_action             = "Deny"
     ip_rules                   = ["0.0.0.0/0"]
     virtual_network_subnet_ids = [azurerm_subnet.example-snet.id]
   }
