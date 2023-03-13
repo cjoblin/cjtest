@@ -68,11 +68,13 @@ resource "azurerm_storage_account" "example-stor" {
   location                 = azurerm_resource_group.example-rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  min_tls_version          = "TLS1_2"
 
   network_rules {
     default_action             = "Deny"
     ip_rules                   = ["0.0.0.0/0"]
     virtual_network_subnet_ids = [azurerm_subnet.example-snet.id]
+	bypass                     = ["Metrics", "AzureServices"]
   }
 
   tags = {
