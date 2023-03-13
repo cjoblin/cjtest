@@ -35,6 +35,10 @@ resource "azurerm_resource_group" "example-rg" {
   location = "Australia East"
 }
 
+resource "azurerm_resource_group" "example-rg3" {
+  name     = "example-resources3"
+  location = "Australia East"
+}
 
 # Create a virtual network within the resource group
 resource "azurerm_virtual_network" "example-vnet" {
