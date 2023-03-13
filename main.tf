@@ -35,8 +35,8 @@ resource "azurerm_resource_group" "example-rg" {
   location = "Australia East"
 }
 
-resource "azurerm_resource_group" "example-rg2" {
-  name     = "example-resources2"
+resource "azurerm_resource_group" "example-rg3" {
+  name     = "example-resources3"
   location = "Australia East"
 }
 
