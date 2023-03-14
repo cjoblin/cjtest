@@ -20,6 +20,9 @@ variable "deploymentAppID"{
 variable "deploymentSecret"{
 	type = string
 }
+variable "vnetCIDR"{
+	type = string
+}
 
 # Configure the provider
 provider "azurerm" {
@@ -45,14 +48,14 @@ resource "azurerm_virtual_network" "example-vnet" {
   name                = "example-network"
   resource_group_name = azurerm_resource_group.example-rg.name
   location            = azurerm_resource_group.example-rg.location
-  address_space       = ["10.0.0.0/16"]
+  address_space       = [var.vnetCIDR]
 }
 
 resource "azurerm_subnet" "example-snet" {
   name                 = "example-subnetname"
   resource_group_name  = azurerm_resource_group.example-rg.name
   virtual_network_name = azurerm_virtual_network.example-vnet.name
-  address_prefixes     = ["10.0.2.0/24"]
+  address_prefixes     = [var.vnetCIDR]
   service_endpoints    = ["Microsoft.Sql", "Microsoft.Storage"]
 }
 
@@ -65,11 +68,13 @@ resource "azurerm_storage_account" "example-stor" {
   location                 = azurerm_resource_group.example-rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  min_tls_version          = "TLS1_2"
 
   network_rules {
     default_action             = "Deny"
     ip_rules                   = ["0.0.0.0/0"]
     virtual_network_subnet_ids = [azurerm_subnet.example-snet.id]
+	bypass                     = ["Metrics", "AzureServices"]
   }
 
   tags = {
