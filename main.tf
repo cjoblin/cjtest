@@ -72,6 +72,7 @@ resource "azurerm_storage_account" "example-stor" {
 
   network_rules {
 #    default_action             = "Deny"
+	default_action             = "Allow"
     ip_rules                   = ["0.0.0.0/0"]
     virtual_network_subnet_ids = [azurerm_subnet.example-snet.id]
 #	bypass                     = ["Metrics", "AzureServices"]
