@@ -1,8 +1,7 @@
 name: SonarCloud
 on:
   push:
-    branches:
-      - main,Dev,Test
+    branches: [ "main","Dev","Test","Pre" ]
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
