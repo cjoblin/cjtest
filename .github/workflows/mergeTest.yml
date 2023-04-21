@@ -5,16 +5,11 @@ on:
 
 jobs:
   allow-pull-only-from-dev:
-    name: Allow pull only from dev
+    if: github.head_ref != 'dev'
     runs-on: ubuntu-latest
-    
-  steps:
-  - name: check source branch
-    uses: actions/github-script@v6
-      if: ${{ github.head_ref != 'dev' }}
+    steps:
+      uses: actions/github-script@v6
         with:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
-      script: |
-        const output = `#### github context values\`
-	### source branch not dev
-	### \`${{ github }}\`
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+        run: echo ${{ github }}
+	run: exit 1
