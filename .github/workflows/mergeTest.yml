@@ -7,5 +7,6 @@ jobs:
   allow-pull-only-from-dev:
     runs-on: ubuntu-latest
     #case insensitve
-    run: ${{ github.head_ref == 'notdev' && exit 0 || exit 1 }}
+    steps:
+      - run: ${{ github.head_ref == 'notdev' && exit 0 || exit 1 }}
      
