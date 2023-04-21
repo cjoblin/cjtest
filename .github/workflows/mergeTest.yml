@@ -8,8 +8,7 @@ jobs:
     if: github.head_ref != 'dev'
     runs-on: ubuntu-latest
     steps:
-      uses: actions/github-script@v6
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-	- run: echo ${{ github }}
-        - run: exit 1
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo ${{ github }}
+      - run: exit 1
+      
