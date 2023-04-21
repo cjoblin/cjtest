@@ -3,15 +3,18 @@ on:
   pull_request:
     branches: [ Test ]
 
-runs-on: ubuntu-latest
-
-steps:
-  - name: Allow only from dev
+jobs:
+  allow-pull-only-from-dev:
+    name: Allow pull only from dev
+    runs-on: ubuntu-latest
+    
+  steps:
+  - name: check source branch
     uses: actions/github-script@v6
-	if: ${{ github.head_ref != 'dev' }}
-	with:
+      if: ${{ github.head_ref != 'dev' }}
+        with:
       github-token: ${{ secrets.GITHUB_TOKEN }}
       script: |
-	    const output = `#### github context values\`
-      ### source branch not dev
-		  ### \`${{ github }}\`
+        const output = `#### github context values\`
+	### source branch not dev
+	### \`${{ github }}\`
