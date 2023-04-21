@@ -8,11 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     #case insensitve
     run: ${{ github.head_ref == 'notdev' && exit 0 || exit 1 }}
-    #if: github.head_ref == 'notdev'
-    #steps:
-    #  - run: exit 0
-    #if: github.head_ref != 'notdev'
-    #steps:
-    #  - uses: crazy-max/ghaction-dump-context@v1
-    #  - run: exit 1
-      
+     
