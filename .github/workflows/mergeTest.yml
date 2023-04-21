@@ -5,7 +5,7 @@ on:
 
 jobs:
   allow-pull-only-from-dev:
-    if: github.head_ref != 'dev'
+    #if: github.head_ref != 'dev'
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ github }}
