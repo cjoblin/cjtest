@@ -8,5 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     #case insensitve
     steps:
-      - run: ${{ github.head_ref == 'notdev' && exit 0 || exit 1 }}
-     
+      if: github.head_ref == 'notdev'
+      - run: exit 0
+      if: github.head_ref != 'notdev'
+      - uses: crazy-max/ghaction-dump-context@v1
+      - run: exit 1
