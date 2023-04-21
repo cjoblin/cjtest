@@ -7,11 +7,12 @@ jobs:
   allow-pull-only-from-dev:
     runs-on: ubuntu-latest
     #case insensitve
-    if: github.head_ref == 'notdev'
-    steps:
-      - run: exit 0
-    if: github.head_ref != 'notdev'
-    steps:
-      - uses: crazy-max/ghaction-dump-context@v1
-      - run: exit 1
+    run: ${{ github.head_ref == 'notdev' && exit 0 || exit 1 }}
+    #if: github.head_ref == 'notdev'
+    #steps:
+    #  - run: exit 0
+    #if: github.head_ref != 'notdev'
+    #steps:
+    #  - uses: crazy-max/ghaction-dump-context@v1
+    #  - run: exit 1
       
