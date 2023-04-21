@@ -8,6 +8,7 @@ jobs:
     #if: github.head_ref != 'dev'
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ github }}
+      - uses: crazy-max/ghaction-dump-context@v1
+      #- run: echo ${{ github }}
       - run: exit 1
       
