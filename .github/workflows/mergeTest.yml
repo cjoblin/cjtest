@@ -6,10 +6,11 @@ on:
 jobs:
   allow-pull-only-from-dev:
     #case insensitve
+    if: github.head_ref == 'notdev'
+      - run: exit 0
     if: github.head_ref != 'notdev'
     runs-on: ubuntu-latest
     steps:
       - uses: crazy-max/ghaction-dump-context@v1
-      #- run: echo ${{ github }}
       - run: exit 1
       
