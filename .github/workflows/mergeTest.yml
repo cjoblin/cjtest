@@ -5,7 +5,8 @@ on:
 
 jobs:
   allow-pull-only-from-dev:
-    #if: github.head_ref != 'dev'
+    #case insensitve
+    if: github.head_ref != 'notdev'
     runs-on: ubuntu-latest
     steps:
       - uses: crazy-max/ghaction-dump-context@v1
