@@ -11,3 +11,7 @@ jobs:
     steps:
       - uses: crazy-max/ghaction-dump-context@v1
       - run: exit 1
+      - name: Close Pull
+        run: gh pr close --comment "Auto-closing pull request - must use Dev branch as source for PRs into Test"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
