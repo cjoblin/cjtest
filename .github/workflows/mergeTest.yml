@@ -12,9 +12,24 @@ jobs:
     #case insensitve
     if: github.head_ref != 'notdev'
     steps:
-      - uses: crazy-max/ghaction-dump-context@v1
+#      - uses: crazy-max/ghaction-dump-context@v1
       - name: Close Pull
         run: gh pr close ${{ github.event.number }} -R ${{ github.repository }} --comment "Auto-closing pull request - must use Dev branch as source for PRs into Test"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: exit 1
+  
+  allow-pull-from-dev:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    #case insensitve
+    if: github.head_ref == 'dev'
+    steps:
+#      - uses: crazy-max/ghaction-dump-context@v1
+      - name: Allow Pull
+        run: gh pr comment ${{ github.event.number }} -R ${{ github.repository }} --body "Pull request from Dev to Test  - allowed"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: exit 0
