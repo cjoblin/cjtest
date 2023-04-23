@@ -1,0 +1,35 @@
+name: Branch Merge into Prod
+on:   
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  block-pull-from-other-branches:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    #case insensitve
+    if: github.head_ref != 'pre'
+    steps:
+#      - uses: crazy-max/ghaction-dump-context@v1
+      - name: Close Pull
+        run: gh pr close ${{ github.event.number }} -R ${{ github.repository }} --comment "Auto-closing pull request - must use Pre branch as source for PRs into main"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: exit 1
+  
+  allow-pull-from-pre:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    #case insensitve
+    if: github.head_ref == 'pre'
+    steps:
+#      - uses: crazy-max/ghaction-dump-context@v1
+      - name: Allow Pull
+        run: gh pr comment ${{ github.event.number }} -R ${{ github.repository }} --body "Pull request from Pre to main  - allowed"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: exit 0
