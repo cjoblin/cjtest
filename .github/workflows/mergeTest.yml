@@ -4,13 +4,13 @@ on:
     branches: [ Test ]
 
 jobs:
-  allow-pull-only-from-dev:
+  block-pull-from-other-branches:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: write
     #case insensitve
-    if: github.head_ref != 'notdev'
+    if: github.head_ref != 'dev'
     steps:
 #      - uses: crazy-max/ghaction-dump-context@v1
       - name: Close Pull
